@@ -1,0 +1,233 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.App {
+  background-color: rgb(40, 44, 52);
+  color: white;
+  font-size: calc(10px + 2vmin);
+}
+
+#content {
+  margin-top: 60px;
+  padding-top: 40px;
+}
+
+h1 {
+  margin: 0;
+  margin-bottom: 20px;
+  padding: 0;
+}
+
+h3 {
+  margin-bottom: 0;
+}
+
+p {
+  margin-top: 5px;
+}
+
+.center-content {
+  width: 1000px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.center {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-top: 0;
+}
+
+.center-all {
+  background-color: #282c34;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+#navbar {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  align-items: stretch;
+  flex-grow: 1;
+  width: 100vw;
+  z-index: 100;
+  background-color: #282c34;
+  border-bottom: 1px solid white;
+  justify-content: space-around;
+}
+
+.link {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 5px;
+  margin: 10px;
+}
+
+.link:hover {
+  color: white;
+}
+
+.artist-img {
+  width: 60px;
+  height: 60px;
+  padding-right: 10px;
+}
+
+.artist-profile {
+  display: flex;
+  padding: 10px;
+  width: 320px;
+}
+
+.artist-profile:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.artist-name {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.artist-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#profile-container {
+  padding-left: 30px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+line#limit {
+  stroke-width: 2;
+  /* stroke-dasharray: 1 6; */
+}
+
+.value {
+  pointer-events: none;
+}
+
+.select-genre {
+  position: absolute;
+  right: 16vw;
+  top: 17vh;
+}
+
+h1 {
+  position: relative;
+  top: 0px;
+}
+/*
+#home-container {
+  top: 50px;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  flex-direction: column;
+} */
+
+.chart {
+  color: white;
+}
+
+/*
+.chart.chart-bottom {
+  padding-bottom: 50px;
+} */
+
+/* .chart.probs {
+  padding-top: 30px;
+} */
+
+.list-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 60px;
+  padding-right: 40px;
+}
+.list-item img {
+  padding-left: 20px;
+}
+
+#equation {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.equation-profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#equation div {
+  padding: 30px;
+}
+
+#central-thesis {
+  font-size: 50px;
+}
+
+.method-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 50vw;
+}
+
+.method {
+  padding-top: 100px;
+}
+
+.center {
+  top: 50px;
+  left: 50px;
+}
+
+.pitchfork-chart {
+  padding-top: 10vh;
+  padding-left: 10vw;
+}
+
+#search-form {
+  max-width: 100vw;
+}
