@@ -12,11 +12,12 @@
     "semantic-ui-react": "^0.86.0"
   },
   "scripts": {
-    "start": "react-scripts start & npm run server",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "python3 ../flask_server/app.py"
+    "server": "python3 ../flask_server/app.py",
+    "dev": "npm run start & npm run server"
   },
   "eslintConfig": {
     "extends": "react-app"

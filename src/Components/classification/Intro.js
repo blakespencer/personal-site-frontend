@@ -1,6 +1,7 @@
 import React from 'react';
+import { HisogramChart } from './';
 
-export default function Intro() {
+export default function Intro(props) {
   return (
     <div className="center-all" id="classification-content">
       <div>
@@ -33,6 +34,7 @@ export default function Intro() {
           <br />
           Below is a graph of the distrobutions for each feature across genres
         </p>
+        <HisogramChart data={props.histogram} />
       </div>
     </div>
   );

@@ -30,14 +30,11 @@ export default class Classification extends Component {
   render() {
     return (
       <div style={{ paddingBottom: '100px' }}>
-        <Intro />
-        <div className="center-all charts">
-          {this.state.histogram ? (
-            <HisogramChart data={this.state.histogram} />
-          ) : (
-            <div>Loading</div>
-          )}
-        </div>
+        {this.state.histogram ? (
+          <Intro histogram={this.state.histogram} />
+        ) : (
+          <div>Loading</div>
+        )}
         <Description />
         <div className="center-all charts">
           {this.state.wrongPrediction ? (

@@ -96,14 +96,17 @@ export default class HistogramChart extends Component {
     const { select } = this.state;
     const node = this.node;
     const t = d3.transition().duration(200);
-    const margin = { left: 80, right: 20, top: 50, bottom: 100 };
-    const width = 1000 - margin.left - margin.right,
-      height = 600 - margin.top - margin.bottom;
-    const g = d3
+    const margin = { left: 55, right: 20, top: 50, bottom: 50 };
+    const width = 900 - margin.left - margin.right,
+      height = 540 - margin.top - margin.bottom;
+    const svg = d3
       .select(node)
+      .classed('svg-container', true)
       .append('svg')
-      .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom)
+      .attr('preserveAspectRatio', 'xMinYMin meet')
+      .attr('viewBox', '0 0 900 540')
+      .classed('svg-content-responsive', true);
+    const g = svg
       .append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
     const xScale = d3.scaleLinear().range([0, width]);
@@ -114,12 +117,8 @@ export default class HistogramChart extends Component {
     const xAxisGroup = g
       .append('g')
       .attr('class', 'x axis')
-      .attr('transform', `translate(0, ${height})`)
-      .style('font-size', '14');
-    const yAxisGroup = g
-      .append('g')
-      .attr('class', 'y axis')
-      .style('font-size', '14');
+      .attr('transform', `translate(0, ${height})`);
+    const yAxisGroup = g.append('g').attr('class', 'y axis');
     const xAxisCall = d3.axisBottom(xScale).tickFormat(d => d);
     xAxisGroup.call(xAxisCall);
     const yAxisCall = d3.axisLeft(yScale);
@@ -128,14 +127,14 @@ export default class HistogramChart extends Component {
     const xLabel = g
       .append('text')
       .attr('x', width / 2)
-      .attr('y', height + 50)
+      .attr('y', height + 40)
       .attr('text-anchor', 'middle')
       .attr('fill', 'grey')
       .text(select);
     const yLabel = g
       .append('text')
       .attr('x', -(height / 2))
-      .attr('y', -60)
+      .attr('y', -40)
       .attr('text-anchor', 'middle')
       .attr('transform', 'rotate(-90)')
       .attr('fill', 'grey')
@@ -458,7 +457,10 @@ export default class HistogramChart extends Component {
               })}
             />
           </div>
-          <div ref={node => (this.node = node)} style={{ color: 'white' }} />
+          <div
+            ref={node => (this.node = node)}
+            style={{ color: 'white', fontSize: '20px' }}
+          />
         </div>
       </React.Fragment>
     );
