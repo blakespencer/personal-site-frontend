@@ -1,20 +1,17 @@
 import React from 'react';
+import { Input } from 'semantic-ui-react';
 
 export default function SearchTrack(props) {
   return (
     <form onSubmit={props.handleSubmitSong}>
-      <label>Search for a song</label>
       <br />
-      <input
+      <Input
+        placeholder="Search for a song..."
         name="songQuery"
-        value={props.songQuery}
         onChange={props.handleChange}
-        style={{ marginBottom: '40px' }}
+        value={props.songQuery}
+        style={{ marginBottom: '40px', fontSize: '70%' }}
       />
-
-      <button type="submit" value="Submit" className="btn btn-dark">
-        Submit
-      </button>
     </form>
   );
 }

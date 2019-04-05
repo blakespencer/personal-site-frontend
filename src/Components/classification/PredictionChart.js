@@ -308,6 +308,7 @@ class PredictionChart extends Component {
           }}
         >
           <Select
+            isSearchable={false}
             options={options}
             onChange={this.handleChange}
             defaultValue={{ value: 'classical', label: 'Classical' }}

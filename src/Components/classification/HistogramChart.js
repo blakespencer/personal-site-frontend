@@ -436,6 +436,7 @@ export default class HistogramChart extends Component {
             }}
           >
             <Select
+              isSearchable={false}
               options={options}
               onChange={this.handleChange}
               // styles={customStyles}

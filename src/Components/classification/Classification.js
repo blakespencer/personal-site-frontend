@@ -1,5 +1,4 @@
 import {
-  FeatureImportanceChart,
   Intro,
   Description,
   DescriptionPart2,

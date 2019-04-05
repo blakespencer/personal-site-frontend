@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { SearchTrack, TrackProfile, TrackProbChart } from '.';
+import { SearchTrack, TrackProfile, TrackProbChart } from './';
+import ReactLoading from 'react-loading';
 
 export default class Search extends Component {
   constructor(props) {
@@ -9,6 +10,7 @@ export default class Search extends Component {
       songQuery: '',
       tracks: [],
       probs: [],
+      isLoading: false,
     };
   }
 
@@ -27,19 +29,28 @@ export default class Search extends Component {
   };
 
   handleChange = evt => {
-    this.setState({ [evt.target.name]: evt.target.value });
+    this.setState({ [evt.target.name]: evt.target.value, isLoading: false });
+  };
+
+  getPredictions = async (uri, selected) => {
+    try {
+      const response = await fetch(`/api/data?uri=${uri}`);
+      const data = await response.json();
+      this.setState({
+        message: data.message,
+        selected,
+        probs: data.probs,
+        trackInfo: data.track_info,
+        isLoading: false,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   handleClick = async (uri, selected) => {
-    const response = await fetch(`/api/data?uri=${uri}`);
-    const data = await response.json();
-    this.setState({
-      message: data.message,
-      tracks: [],
-      selected,
-      probs: data.probs,
-      trackInfo: data.track_info,
-    });
+    this.setState({ isLoading: true, tracks: [] });
+    this.getPredictions(uri, selected);
   };
 
   render() {
@@ -62,7 +73,14 @@ export default class Search extends Component {
           })}
         </div>
         {this.state.probs.length ? (
-          <TrackProbChart data={this.state.probs} track={this.state.selected} />
+          <div style={{ maxWidth: '1000px', width: '100%' }}>
+            <TrackProbChart
+              data={this.state.probs}
+              track={this.state.selected}
+            />
+          </div>
+        ) : this.state.isLoading ? (
+          <ReactLoading type="spinningBubbles" color="rgba(255,255,255,0.5)" />
         ) : (
           <div />
         )}
