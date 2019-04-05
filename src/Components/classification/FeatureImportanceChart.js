@@ -5,17 +5,17 @@ const featuresNameObj = {
   danceability: 'Danceability',
   energy: 'Energy',
   acousticness: 'Acousticness',
-  speechiness: 'Speechiness',
+  speechiness: 'Speech',
   valence: 'Valence',
   loudness: 'Loudness',
-  instrumentalness: 'Instrumentalness',
+  instrumentalness: 'Instrumenta...',
   tempo: 'Tempo',
-  end_of_fade_in: 'End of Fade-in',
-  start_of_fade_out: 'Start of Fade-out',
-  tempo_confidence: 'Tempo Confidence',
+  end_of_fade_in: 'End Fade-in',
+  start_of_fade_out: 'Start Fade-out',
+  tempo_confidence: 'Tempo Confi...',
   liveness: 'Liveness',
-  time_signature_confidence: 'Time Signature Confidence',
-  time_signature: 'Time Signature',
+  time_signature_confidence: 'Time Sig Conf',
+  time_signature: 'Time Sig',
 };
 
 export default class FeatureImportanceChart extends Component {
@@ -36,16 +36,22 @@ export default class FeatureImportanceChart extends Component {
     const features = data.map(el => el.feature);
     const importance = data.map(el => Math.round(el.importance * 100) / 100);
     const node = this.node;
-    const margin = { left: 200, right: 140, top: 50, bottom: 100 };
-    const width = 1200 - margin.left - margin.right,
+    const margin = { left: 100, right: 20, top: 50, bottom: 100 };
+    const width = 1000 - margin.left - margin.right,
       height = 600 - margin.top - margin.bottom;
-    const g = d3
+
+    const svg = d3
       .select(node)
+      .classed('svg-container', true)
       .append('svg')
-      .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom)
+      .attr('preserveAspectRatio', 'xMinYMin meet')
+      .attr('viewBox', '0 0 1000 600')
+      .classed('svg-content-responsive', true);
+
+    const g = svg
       .append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
+
     const yScale = d3
       .scaleBand()
       .domain(features)
@@ -134,7 +140,7 @@ export default class FeatureImportanceChart extends Component {
 
   render() {
     return (
-      <div className="chart feature-importance">
+      <div className="chart">
         <div ref={node => (this.node = node)} />
       </div>
     );

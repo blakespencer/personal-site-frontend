@@ -73,11 +73,18 @@ class PredictionChart extends Component {
     const margin = { left: 80, right: 20, top: 50, bottom: 100 };
     const width = 1000 - margin.left - margin.right,
       height = 600 - margin.top - margin.bottom;
-    const g = d3
+
+    const svg = d3
       .select(node)
+      .classed('svg-container', true)
       .append('svg')
-      .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom)
+      .attr('preserveAspectRatio', 'xMinYMin meet')
+      .attr('viewBox', '0 0 1000 600')
+      .classed('svg-content-responsive', true);
+
+    // .attr('width', width + margin.left + margin.right)
+    // .attr('height', height + margin.top + margin.bottom);
+    const g = svg
       .append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
     const xScale = d3

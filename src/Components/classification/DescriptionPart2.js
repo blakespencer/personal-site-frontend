@@ -1,6 +1,7 @@
 import React from 'react';
+import { FeatureImportanceChart } from './';
 
-export default function DescriptionPart2() {
+export default function DescriptionPart2(props) {
   return (
     <div className="center-all">
       <p>
@@ -20,6 +21,7 @@ export default function DescriptionPart2() {
           Graphed bellow represent how the model predicted for each genre with
           the holdout test data.
         </p>
+        <FeatureImportanceChart featureImportance={props.featureImportance} />
       </div>
     </div>
   );

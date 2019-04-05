@@ -99,6 +99,7 @@ export default class HistogramChart extends Component {
     const margin = { left: 55, right: 20, top: 50, bottom: 50 };
     const width = 900 - margin.left - margin.right,
       height = 540 - margin.top - margin.bottom;
+
     const svg = d3
       .select(node)
       .classed('svg-container', true)
@@ -106,9 +107,11 @@ export default class HistogramChart extends Component {
       .attr('preserveAspectRatio', 'xMinYMin meet')
       .attr('viewBox', '0 0 900 540')
       .classed('svg-content-responsive', true);
+
     const g = svg
       .append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
+
     const xScale = d3.scaleLinear().range([0, width]);
     xScale.domain([0, 1]);
     const yScale = d3.scaleLinear().range([height, 0]);
@@ -425,13 +428,6 @@ export default class HistogramChart extends Component {
 
     return (
       <React.Fragment>
-        {/* <select onChange={this.handleChange}>
-      {features.map(el => (
-        <option key={el} value={el}>
-          {el}
-        </option>
-      ))}
-          </select> */}
         <div className="chart">
           <div
             style={{

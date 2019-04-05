@@ -1,6 +1,4 @@
 import {
-  PredictionChart,
-  HisogramChart,
   FeatureImportanceChart,
   Intro,
   Description,
@@ -35,27 +33,19 @@ export default class Classification extends Component {
         ) : (
           <div>Loading</div>
         )}
-        <Description />
-        <div className="center-all charts">
-          {this.state.wrongPrediction ? (
-            <PredictionChart
-              data={this.state.wrongPrediction}
-              precision={this.state.precision}
-            />
-          ) : (
-            <div>Loading</div>
-          )}
-        </div>
-        <DescriptionPart2 />
-        <div className="center-all charts">
-          {this.state.featureImportance ? (
-            <FeatureImportanceChart
-              featureImportance={this.state.featureImportance}
-            />
-          ) : (
-            <div>Loading</div>
-          )}
-        </div>
+        {this.state.wrongPrediction ? (
+          <Description
+            data={this.state.wrongPrediction}
+            precision={this.state.precision}
+          />
+        ) : (
+          <div>Loading</div>
+        )}
+        {this.state.featureImportance ? (
+          <DescriptionPart2 featureImportance={this.state.featureImportance} />
+        ) : (
+          <div>Loading</div>
+        )}
         <DescriptionPart3 />
         <Search />
       </div>

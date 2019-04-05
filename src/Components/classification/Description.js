@@ -1,6 +1,7 @@
 import React from 'react';
+import { PredictionChart } from './';
 
-export default function Description() {
+export default function Description(props) {
   return (
     <div className="center-all">
       <div>
@@ -25,6 +26,7 @@ export default function Description() {
           Graphed bellow represent how the model predicted for each genre with
           the holdout test data.
         </p>
+        <PredictionChart data={props.data} precision={props.precision} />
       </div>
     </div>
   );
