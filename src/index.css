@@ -20,8 +20,8 @@ code {
 }
 
 #content {
-  margin-top: 60px;
-  padding-top: 40px;
+  padding-top: 100px;
+  min-height: calc(100vh - 100px);
 }
 
 h1 {
@@ -134,7 +134,6 @@ p {
 
 line#limit {
   stroke-width: 2;
-  /* stroke-dasharray: 1 6; */
 }
 
 .value {
@@ -151,27 +150,10 @@ h1 {
   position: relative;
   top: 0px;
 }
-/*
-#home-container {
-  top: 50px;
-  display: flex;
-  align-self: center;
-  justify-content: center;
-  flex-direction: column;
-} */
 
 .chart {
   color: white;
 }
-
-/*
-.chart.chart-bottom {
-  padding-bottom: 50px;
-} */
-
-/* .chart.probs {
-  padding-top: 30px;
-} */
 
 .list-item {
   display: flex;

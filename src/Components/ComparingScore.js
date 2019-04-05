@@ -23,13 +23,13 @@ export default class ComparingScore extends Component {
   createBars = rawData => {
     const node = this.node;
     const formatData = data => {
-      const output = [];
-      const topics = [
-        'Artist',
-        'History/Context',
-        'Sound',
-        'Opinion/Interpretation',
-      ];
+      // const output = [];
+      // const topics = [
+      //   'Artist',
+      //   'History/Context',
+      //   'Sound',
+      //   'Opinion/Interpretation',
+      // ];
       data.forEach(row => {
         let sum = row['Opinion/Interpretation'];
         row.Sound += sum;
@@ -47,7 +47,7 @@ export default class ComparingScore extends Component {
       'Sound',
       'Opinion/Interpretation',
     ];
-    const genres = data.map(el => el.genre);
+    // const genres = data.map(el => el.genre);
     const margin = { left: 80, right: 100, top: 50, bottom: 100 };
     const width = 1000 - margin.left - margin.right,
       height = 600 - margin.top - margin.bottom;

@@ -102,6 +102,8 @@ export default class Word2VecChart extends Component {
       yScale,
       continentColor,
       t,
+      xAxisCall,
+      yAxisCall,
       g,
       height,
       xAxisGroup,
@@ -112,15 +114,7 @@ export default class Word2VecChart extends Component {
   };
 
   updateScatterPlot = data => {
-    const {
-      g,
-      t,
-      xScale,
-      yScale,
-      xAxisGroup,
-      yAxisGroup,
-      height,
-    } = this.state.d3Stuff;
+    const { g, t, xScale, yScale, height } = this.state.d3Stuff;
     let ys = [];
     let xs = [];
     let labelsArr = [];
@@ -152,7 +146,8 @@ export default class Word2VecChart extends Component {
     }
 
     xScale.domain(d3.extent(xs, d => d));
-    const xAxisCall = d3.axisBottom(xScale);
+    // calling xAxis
+    d3.axisBottom(xScale);
     // xAxisGroup
     //   .transition(t)
     //   .duration(750)
@@ -160,7 +155,8 @@ export default class Word2VecChart extends Component {
 
     // yScale.domain(d3.extent(ys, d => d));
     yScale.domain(d3.extent(ys, d => d));
-    const yAxisCall = d3.axisLeft(yScale);
+    // Calling yAxis
+    d3.axisLeft(yScale);
     // yAxisGroup
     //   .transition(t)
     //   .duration(750)

@@ -22,7 +22,7 @@ export default function TrackProfile(props) {
         })
       }
     >
-      <img className="artist-img" src={albumImageURI} />
+      <img className="artist-img" src={albumImageURI} alt="" />
       <div className="artist-container">
         <div>{name}</div>
         <div className="artist-name">{artist}</div>

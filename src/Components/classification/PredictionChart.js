@@ -68,7 +68,7 @@ class PredictionChart extends Component {
   }
 
   createBarChart() {
-    const { select } = this.state;
+    // const { select } = this.state;
     const node = this.node;
     const margin = { left: 80, right: 20, top: 50, bottom: 100 };
     const width = 1000 - margin.left - margin.right,

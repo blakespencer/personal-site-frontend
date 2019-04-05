@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { SearchTrack } from './';
 
 export default class NavBar extends Component {
   render() {

@@ -301,6 +301,7 @@ export default class HistogramChart extends Component {
       xAxisGroup,
       yAxisGroup,
       xLabel,
+      yLabel,
     };
   };
 
@@ -325,6 +326,7 @@ export default class HistogramChart extends Component {
       xDomainArray = xDomainArray.concat(dataFeature[genreKeys[k]].x);
       yDomainArray = yDomainArray.concat(dataFeature[genreKeys[k]].y);
     }
+    const t = d3.transition().duration(200);
     xScale.domain(
       d3.extent(xDomainArray, function(d) {
         return d;
@@ -360,7 +362,6 @@ export default class HistogramChart extends Component {
     // featureLabel.text(select);
     xLabel.text(select);
     // g.transition();
-    const t = d3.transition().duration(200);
     function drawLines() {
       const genreArray = Object.keys(dataClean);
       genreArray.forEach(el => {
@@ -422,32 +423,6 @@ export default class HistogramChart extends Component {
     features.map((el, idx) =>
       options.push({ value: el, label: featureNames[idx] })
     );
-    const backgroundColor = state => {
-      const { isFocused, isSelected } = state;
-      if (isFocused) {
-        return 'rgba(40, 44, 52, 0.2)';
-      }
-      if (isSelected) {
-        return 'rgba(40, 44, 52, 0.5)';
-      }
-    };
-    const customStyles = {
-      option: (provided, state) => {
-        return { ...provided, backgroundColor: backgroundColor(state) };
-      },
-      control: (provided, state) => {
-        return {
-          ...provided,
-          borderColor: 'white',
-          '&:hover': { borderColor: 'white' },
-          backgroundColor: 'white',
-        };
-      },
-      singleValue: (provided, state) => ({ ...provided }),
-      placeholder: (provided, state) => {
-        return { ...provided };
-      },
-    };
 
     return (
       <React.Fragment>
