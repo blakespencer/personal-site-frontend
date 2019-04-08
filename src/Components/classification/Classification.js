@@ -46,7 +46,9 @@ export default class Classification extends Component {
           <div>Loading</div>
         )}
         <DescriptionPart3 />
-        <Search />
+        <section id="model">
+          <Search />
+        </section>
       </div>
     );
   }

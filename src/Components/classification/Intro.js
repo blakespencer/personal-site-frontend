@@ -1,5 +1,6 @@
 import React from 'react';
 import { HisogramChart } from './';
+import { HashLink as Link } from 'react-router-hash-link';
 
 export default function Intro(props) {
   return (
@@ -9,7 +10,10 @@ export default function Intro(props) {
         <p>
           Music genre is fluid, dynamic and ever evolving. I wanted to see if it
           was possible to correctly classify music into predetermined genres
-          based on a limited set of features.
+          based on a limited set of features. To try out my model by{' '}
+          <Link smooth to="/classification#model">
+            Clicking Here
+          </Link>
         </p>
       </div>
       <div>
