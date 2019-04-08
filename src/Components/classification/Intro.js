@@ -5,7 +5,7 @@ export default function Intro(props) {
   return (
     <div className="center-all" id="classification-content">
       <div>
-        <h1>Classifing Music Genre</h1>
+        <h1>Classifying Music Genre</h1>
         <p>
           Music genre is fluid, dynamic and ever evolving. I wanted to see if it
           was possible to correctly classify music into predetermined genres

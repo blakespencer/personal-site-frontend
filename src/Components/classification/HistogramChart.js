@@ -439,7 +439,16 @@ export default class HistogramChart extends Component {
               isSearchable={false}
               options={options}
               onChange={this.handleChange}
-              // styles={customStyles}
+              styles={{
+                option: (provided, state) => ({
+                  ...provided,
+                  fontSize: 'calc(2px + 2vmin)',
+                }),
+                control: (provided, state) => ({
+                  ...provided,
+                  fontSize: 'calc(2px + 2vmin)',
+                }),
+              }}
               defaultValue={{ value: 'danceability', label: 'Danceability' }}
               theme={theme => ({
                 ...theme,

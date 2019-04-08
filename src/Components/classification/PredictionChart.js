@@ -312,6 +312,16 @@ class PredictionChart extends Component {
             options={options}
             onChange={this.handleChange}
             defaultValue={{ value: 'classical', label: 'Classical' }}
+            styles={{
+              option: (provided, state) => ({
+                ...provided,
+                fontSize: 'calc(2px + 2vmin)',
+              }),
+              control: (provided, state) => ({
+                ...provided,
+                fontSize: 'calc(2px + 2vmin)',
+              }),
+            }}
             theme={theme => ({
               ...theme,
               colors: {
