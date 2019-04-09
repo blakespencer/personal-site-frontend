@@ -1,6 +1,7 @@
 import React from 'react';
 import { HisogramChart } from './';
 import { HashLink as Link } from 'react-router-hash-link';
+import ReactLoading from 'react-loading';
 
 export default function Intro(props) {
   return (
@@ -38,7 +39,15 @@ export default function Intro(props) {
           <br />
           Below is a graph of the distrobutions for each feature across genres
         </p>
-        <HisogramChart data={props.histogram} />
+        {props.histogram ? (
+          <HisogramChart data={props.histogram} />
+        ) : (
+          <ReactLoading
+            type="spinningBubbles"
+            color="rgba(255,255,255,0.5)"
+            className="loading"
+          />
+        )}
       </div>
     </div>
   );

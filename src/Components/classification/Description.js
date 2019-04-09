@@ -1,5 +1,6 @@
 import React from 'react';
 import { PredictionChart } from './';
+import ReactLoading from 'react-loading';
 
 export default function Description(props) {
   return (
@@ -26,7 +27,15 @@ export default function Description(props) {
           Graphed bellow represent how the model predicted for each genre with
           the holdout test data.
         </p>
-        <PredictionChart data={props.data} precision={props.precision} />
+        {props.data ? (
+          <PredictionChart data={props.data} precision={props.precision} />
+        ) : (
+          <ReactLoading
+            type="spinningBubbles"
+            color="rgba(255,255,255,0.5)"
+            className="loading"
+          />
+        )}
       </div>
     </div>
   );

@@ -27,24 +27,12 @@ export default class Classification extends Component {
   render() {
     return (
       <div style={{ paddingBottom: '100px' }}>
-        {this.state.histogram ? (
-          <Intro histogram={this.state.histogram} />
-        ) : (
-          <div>Loading</div>
-        )}
-        {this.state.wrongPrediction ? (
-          <Description
-            data={this.state.wrongPrediction}
-            precision={this.state.precision}
-          />
-        ) : (
-          <div>Loading</div>
-        )}
-        {this.state.featureImportance ? (
-          <DescriptionPart2 featureImportance={this.state.featureImportance} />
-        ) : (
-          <div>Loading</div>
-        )}
+        <Intro histogram={this.state.histogram} />
+        <Description
+          data={this.state.wrongPrediction}
+          precision={this.state.precision}
+        />
+        <DescriptionPart2 featureImportance={this.state.featureImportance} />
         <DescriptionPart3 />
         <section id="model">
           <Search />

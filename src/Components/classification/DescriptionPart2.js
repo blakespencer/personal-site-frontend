@@ -1,5 +1,6 @@
 import React from 'react';
 import { FeatureImportanceChart } from './';
+import ReactLoading from 'react-loading';
 
 export default function DescriptionPart2(props) {
   return (
@@ -11,7 +12,15 @@ export default function DescriptionPart2(props) {
           the seporation of each genre. Energy gave the second most information
           to the model, however
         </p>
-        <FeatureImportanceChart featureImportance={props.featureImportance} />
+        {props.featureImportance ? (
+          <FeatureImportanceChart featureImportance={props.featureImportance} />
+        ) : (
+          <ReactLoading
+            type="spinningBubbles"
+            color="rgba(255,255,255,0.5)"
+            className="loading"
+          />
+        )}
       </div>
     </div>
   );

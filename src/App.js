@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { NavBar, Home, FinalProject, Classification } from './Components';
-import PitchFork from './Components/Pitchfork';
+import PitchFork from './Components/nlp/Pitchfork';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends Component {

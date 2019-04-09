@@ -232,3 +232,9 @@ h1 {
   top: 10px;
   left: 0;
 }
+
+.loading {
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
