@@ -7,7 +7,7 @@ export default function Intro(props) {
   return (
     <div className="center-all" id="classification-content">
       <div>
-        <h1 style={{ display: 'flex' }}>
+        <h1 style={{ display: 'flex', fontSize: '2em' }}>
           Classifying Music Genre
           <a href="https://github.com/blakespencer/classifying-genre">
             <img

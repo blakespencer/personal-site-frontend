@@ -33,7 +33,7 @@ h1 {
 
 h3 {
   margin-bottom: 0;
-  font-size: calc(2rem + 10px);
+  font-size: 2em;
   margin-top: 50px !important;
 }
 
@@ -240,6 +240,6 @@ h1 {
 }
 
 #github-icon {
-  height: 60px;
+  height: 1.25em;
   margin-left: 10px;
 }

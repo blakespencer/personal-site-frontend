@@ -1,54 +1,15 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 import Select from 'react-select';
-import { histClick } from './d3CustomFuncs';
-
-const genreArray = ['classical', 'jazz', 'reggae', 'rap', 'rock', 'dance'];
-
-const features = [
-  'danceability',
-  'energy',
-  'acousticness',
-  'speechiness',
-  'valence',
-  'loudness',
-  'instrumentalness',
-  'tempo',
-  'end_of_fade_in',
-  'start_of_fade_out',
-  'tempo_confidence',
-  'liveness',
-  'time_signature_confidence',
-  'time_signature',
-];
-
-const featureNames = [
-  'Danceability',
-  'Energy',
-  'Acousticness',
-  'Speechiness',
-  'Valence',
-  'Loudness',
-  'Instrumentalness',
-  'Tempo',
-  'End of Fade In',
-  'Start of Fade Out',
-  'Tempo Confidence',
-  'Liveness',
-  'Time Signature Confidence',
-  'Time Signature',
-];
-
-function hexToRgb(hex) {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result
-    ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      }
-    : null;
-}
+import {
+  histClick,
+  histHover,
+  hexToRgb,
+  features,
+  featureNames,
+  genreArray,
+  selectStyles,
+} from './d3CustomFuncs';
 
 export default class HistogramChart extends Component {
   state = {
@@ -113,9 +74,9 @@ export default class HistogramChart extends Component {
       .append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
 
-    const xScale = d3.scaleLinear().range([0, width]);
+    const xScale = d3.scaleLinear().range([1.5, width]);
     xScale.domain([0, 1]);
-    const yScale = d3.scaleLinear().range([height, 0]);
+    const yScale = d3.scaleLinear().range([height - 1.5, 0]);
     yScale.domain([0, 10]);
     const continentColor = d3.scaleOrdinal(d3.schemePastel1);
     const xAxisGroup = g
@@ -204,8 +165,6 @@ export default class HistogramChart extends Component {
     const legend = g
       .append('g')
       .attr('class', 'legend')
-      // .attr('x', width - 65)
-      // .attr('y', -10)
       .attr('height', 100)
       .attr('width', 100);
 
@@ -237,34 +196,10 @@ export default class HistogramChart extends Component {
         return d;
       })
       .on('mouseover', function(d) {
-        d3.select(this).attr('fill', 'rgba(255,255,255,1)');
-        d3.select(`#line-${d}`)
-          .attr('stroke', () => {
-            const colour = continentColor(d);
-            const { r, g, b } = hexToRgb(colour);
-            return `rgba(${r}, ${g}, ${b}, 1)`;
-          })
-          .attr('fill', () => {
-            const colour = continentColor(d);
-            const { r, g, b } = hexToRgb(colour);
-            return `rgba(${r}, ${g}, ${b}, 0.8)`;
-          })
-          .style('stroke-width', 5);
+        histHover(d, true, continentColor);
       })
       .on('mouseout', function(d) {
-        d3.select(this).attr('fill', 'rgba(255,255,255,0.5)');
-        d3.select(`#line-${d}`)
-          .attr('stroke', () => {
-            const colour = continentColor(d);
-            const { r, g, b } = hexToRgb(colour);
-            return `rgba(${r}, ${g}, ${b}, 0.8)`;
-          })
-          .attr('fill', () => {
-            const colour = continentColor(d);
-            const { r, g, b } = hexToRgb(colour);
-            return `rgba(${r}, ${g}, ${b}, 0.5)`;
-          })
-          .style('stroke-width', 1.5);
+        histHover(d, false, continentColor);
       });
 
     return {
@@ -356,35 +291,10 @@ export default class HistogramChart extends Component {
           .attr('stroke-linejoin', 'round')
           .attr('stroke-linecap', 'round')
           .on('mouseover', function(d) {
-            d3.select(`#legend-${el}`).attr('fill', 'rgba(255,255,255,1)');
-            d3.select(this)
-              .attr('stroke', () => {
-                const colour = continentColor(el);
-                const { r, g, b } = hexToRgb(colour);
-                return `rgba(${r}, ${g}, ${b}, 1)`;
-                // return 'rgba(0,0,0,0.8)';
-              })
-              .attr('fill', () => {
-                const colour = continentColor(el);
-                const { r, g, b } = hexToRgb(colour);
-                return `rgba(${r}, ${g}, ${b}, 0.8)`;
-              })
-              .style('stroke-width', 5);
+            histHover(el, true, continentColor);
           })
           .on('mouseout', function(d) {
-            d3.select(`#legend-${el}`).attr('fill', 'rgba(255,255,255,0.5)');
-            d3.select(this)
-              .attr('stroke', () => {
-                const colour = continentColor(el);
-                const { r, g, b } = hexToRgb(colour);
-                return `rgba(${r}, ${g}, ${b}, 0.8)`;
-              })
-              .attr('fill', () => {
-                const colour = continentColor(el);
-                const { r, g, b } = hexToRgb(colour);
-                return `rgba(${r}, ${g}, ${b}, 0.5)`;
-              })
-              .style('stroke-width', 1.5);
+            histHover(el, false, continentColor);
           })
           .on('click', function() {
             const thisGenre = this.id
@@ -413,8 +323,6 @@ export default class HistogramChart extends Component {
     features.map((el, idx) =>
       options.push({ value: el, label: featureNames[idx] })
     );
-
-    // console.log(this.state.data);
     return (
       <React.Fragment>
         <div className="chart">
@@ -424,33 +332,7 @@ export default class HistogramChart extends Component {
               marginBottom: '20px',
             }}
           >
-            <Select
-              isSearchable={false}
-              options={options}
-              onChange={this.handleChange}
-              styles={{
-                option: (provided, state) => ({
-                  ...provided,
-                  fontSize: 'calc(2px + 2vmin)',
-                }),
-                control: (provided, state) => ({
-                  ...provided,
-                  fontSize: 'calc(2px + 2vmin)',
-                }),
-              }}
-              defaultValue={{ value: 'danceability', label: 'Danceability' }}
-              theme={theme => ({
-                ...theme,
-                colors: {
-                  ...theme.colors,
-                  primary25: 'rgba(40, 44, 52, 0.25)',
-                  primary75: 'rgba(40, 44, 52, 0.75)',
-                  primary50: 'rgba(40, 44, 52, 0.50)',
-
-                  primary: 'rgba(40, 44, 52, 0.5)',
-                },
-              })}
-            />
+            <Select onChange={this.handleChange} {...selectStyles} />
           </div>
           <div
             ref={node => (this.node = node)}

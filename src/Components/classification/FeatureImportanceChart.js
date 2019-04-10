@@ -60,7 +60,7 @@ export default class FeatureImportanceChart extends Component {
     const xScale = d3
       .scaleLinear()
       .domain([0, Math.max(...importance) + 0.01])
-      .range([0, width]);
+      .range([1, width]);
     const continentColor = d3.scaleOrdinal(d3.schemePastel1);
     const xAxisGroup = g
       .append('g')
