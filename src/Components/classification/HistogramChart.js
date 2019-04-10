@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 import Select from 'react-select';
+import { histClick } from './d3CustomFuncs';
 
 const genreArray = ['classical', 'jazz', 'reggae', 'rap', 'rock', 'dance'];
 
@@ -115,7 +116,7 @@ export default class HistogramChart extends Component {
     const xScale = d3.scaleLinear().range([0, width]);
     xScale.domain([0, 1]);
     const yScale = d3.scaleLinear().range([height, 0]);
-    yScale.domain([0, 1]);
+    yScale.domain([0, 10]);
     const continentColor = d3.scaleOrdinal(d3.schemePastel1);
     const xAxisGroup = g
       .append('g')
@@ -151,6 +152,8 @@ export default class HistogramChart extends Component {
       .style('text-decoration', 'underline')
       .text('Distribution for Genres');
 
+    const dataFeature = this.props.data[select];
+    const dataClean = this.cleanData(dataFeature, select);
     const line = d3
       .line()
       .x(function(d) {
@@ -163,7 +166,7 @@ export default class HistogramChart extends Component {
     function drawLines() {
       genreArray.forEach(el => {
         g.append('path')
-          .datum({ x: [0, 1], y: [0, 1] })
+          .datum(dataClean[el])
           .attr('fill', () => {
             const colour = continentColor(el);
             const { r, g, b } = hexToRgb(colour);
@@ -192,35 +195,6 @@ export default class HistogramChart extends Component {
               const colour = continentColor(el);
               const { r, g, b } = hexToRgb(colour);
               return `rgba(${r}, ${g}, ${b}, 0.5)`;
-            });
-          })
-          .on('click', function(d) {
-            const thisGenre = this.id.replace('line-', '');
-            genreArray.forEach(el => {
-              if (el !== thisGenre) {
-                const path = d3.selectAll(`#line-${el}`);
-                const line = d3
-                  .line()
-                  .x(function(d) {
-                    return xScale(d.x);
-                  })
-                  .y(function(d) {
-                    return yScale(d.y);
-                  })
-                  .curve(d3.curveMonotoneX);
-                path
-                  .datum(d => {
-                    const numIterator = width / d.length;
-                    const newDatum = [];
-                    d.forEach((el, i) => {
-                      newDatum.push({ x: xScale(numIterator * i), y: 0 });
-                    });
-                    return newDatum;
-                  })
-                  .transition(t)
-                  .duration(750)
-                  .attr('d', line);
-              }
             });
           });
       });
@@ -361,15 +335,15 @@ export default class HistogramChart extends Component {
         return yScale(d.y);
       })
       .curve(d3.curveMonotoneX);
-    // featureLabel.text(select);
     xLabel.text(select);
-    // g.transition();
+
     function drawLines() {
       const genreArray = Object.keys(dataClean);
       genreArray.forEach(el => {
         g.select(`#line-${el}`)
           .datum(dataClean[el])
-          .attr('fill', () => {
+          .attr('fill', function() {
+            this.className.clicked = false;
             const colour = continentColor(el);
             const { r, g, b } = hexToRgb(colour);
             return `rgba(${r}, ${g}, ${b}, 0.5)`;
@@ -412,6 +386,20 @@ export default class HistogramChart extends Component {
               })
               .style('stroke-width', 1.5);
           })
+          .on('click', function() {
+            const thisGenre = this.id
+              .replace('line-', '')
+              .replace('-clicked', '');
+            histClick.call(
+              this,
+              thisGenre,
+              genreArray,
+              dataClean,
+              xScale,
+              yScale,
+              t
+            );
+          })
           .transition(t)
           .duration(750)
           .attr('d', line);
@@ -426,6 +414,7 @@ export default class HistogramChart extends Component {
       options.push({ value: el, label: featureNames[idx] })
     );
 
+    // console.log(this.state.data);
     return (
       <React.Fragment>
         <div className="chart">

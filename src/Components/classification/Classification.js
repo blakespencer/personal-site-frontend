@@ -26,7 +26,8 @@ export default class Classification extends Component {
   }
   render() {
     return (
-      <div style={{ paddingBottom: '100px' }}>
+      // <div style={{ paddingBottom: '100px' }}>
+      <div>
         <Intro histogram={this.state.histogram} />
         <Description
           data={this.state.wrongPrediction}
@@ -37,6 +38,17 @@ export default class Classification extends Component {
         <section id="model">
           <Search />
         </section>
+        <div className="center-all">
+          <footer style={{ height: '70px' }}>
+            <a href="https://github.com/blakespencer/classifying-genre">
+              <img
+                id="github-icon"
+                src="/GitHub-Mark-Light-120px-plus.png"
+                alt=""
+              />
+            </a>
+          </footer>
+        </div>
       </div>
     );
   }
