@@ -3,6 +3,11 @@ import './App.css';
 import { NavBar, Home, FinalProject, Classification } from './Components';
 import PitchFork from './Components/nlp/Pitchfork';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faFileAlt, faEnvelopeSquare } from '@fortawesome/free-solid-svg-icons';
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+
+library.add(faGithub, faLinkedin, faFileAlt, faEnvelopeSquare);
 
 class App extends Component {
   render() {
@@ -16,6 +21,7 @@ class App extends Component {
             <Route exact path="/pitchfork" component={PitchFork} />
             <Route exact path="/finalProject" component={FinalProject} />
           </div>
+          {/* <Footer /> */}
         </div>
       </Router>
     );

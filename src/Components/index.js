@@ -3,3 +3,4 @@ export { default as Home } from './Home';
 export { default as Graphs } from './classification/PredictionChart';
 export { default as Classification } from './classification/Classification';
 export { default as FinalProject } from './finalProject/FinalProject';
+export { default as Footer } from './Footer';

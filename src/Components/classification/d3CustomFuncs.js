@@ -110,23 +110,22 @@ export function histClick(thisGenre, genreArray, dataClean, xScale, yScale, t) {
   }
 }
 
-export const histHover = (d, isMouseOver, continentColor) => {
-  console.log(d);
+export const histHover = (thisGenre, isMouseOver, continentColor) => {
   if (isMouseOver) {
-    d3.select(`#legend-${d}`).attr('fill', 'rgba(255,255,255,1)');
+    d3.select(`#legend-${thisGenre}`).attr('fill', 'rgba(255,255,255,1)');
   } else {
-    d3.select(`#legend-${d}`).attr('fill', 'rgba(255,255,255,0.5)');
+    d3.select(`#legend-${thisGenre}`).attr('fill', 'rgba(255,255,255,0.5)');
   }
-  d3.select(`#line-${d}`)
+  d3.select(`#line-${thisGenre}`)
     .attr('stroke', () => {
-      const colour = continentColor(d);
+      const colour = continentColor(thisGenre);
       const { r, g, b } = hexToRgb(colour);
       return isMouseOver
         ? `rgba(${r}, ${g}, ${b}, 1)`
         : `rgba(${r}, ${g}, ${b}, 0.8)`;
     })
     .attr('fill', () => {
-      const colour = continentColor(d);
+      const colour = continentColor(thisGenre);
       const { r, g, b } = hexToRgb(colour);
       return isMouseOver
         ? `rgba(${r}, ${g}, ${b}, 0.8)`

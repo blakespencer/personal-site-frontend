@@ -2,18 +2,24 @@ import React from 'react';
 import { HisogramChart } from './';
 import { HashLink as Link } from 'react-router-hash-link';
 import ReactLoading from 'react-loading';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function Intro(props) {
   return (
     <div className="center-all" id="classification-content">
       <div>
-        <h1 style={{ display: 'flex', fontSize: '2em' }}>
+        <h1
+          style={{
+            display: 'flex',
+            fontSize: '2em',
+            justifyContent: 'space-between',
+          }}
+        >
           Classifying Music Genre
           <a href="https://github.com/blakespencer/classifying-genre">
-            <img
-              id="github-icon"
-              src="/GitHub-Mark-Light-120px-plus.png"
-              alt=""
+            <FontAwesomeIcon
+              icon={['fab', 'github']}
+              style={{ color: 'white' }}
             />
           </a>
         </h1>
@@ -21,7 +27,7 @@ export default function Intro(props) {
           Music genre is fluid, dynamic and ever evolving. I wanted to see if it
           was possible to correctly classify music into predetermined genres
           based on a limited set of features. To try out my model by{' '}
-          <Link smooth to="/classification#model">
+          <Link smooth to="/classification#model" className="contact-link">
             Clicking Here
           </Link>
         </p>

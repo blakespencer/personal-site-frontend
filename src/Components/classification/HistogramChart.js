@@ -76,16 +76,16 @@ export default class HistogramChart extends Component {
 
     const xScale = d3.scaleLinear().range([1.5, width]);
     xScale.domain([0, 1]);
-    const yScale = d3.scaleLinear().range([height - 1.5, 0]);
+    const yScale = d3.scaleLinear().range([height, 0]);
     yScale.domain([0, 10]);
     const continentColor = d3.scaleOrdinal(d3.schemePastel1);
-    const xAxisGroup = g
-      .append('g')
-      .attr('class', 'x axis')
-      .attr('transform', `translate(0, ${height})`);
+    // const xAxisGroup = g
+    //   .append('g')
+    //   .attr('class', 'x axis')
+    //   .attr('transform', `translate(0, ${height})`);
     const yAxisGroup = g.append('g').attr('class', 'y axis');
-    const xAxisCall = d3.axisBottom(xScale).tickFormat(d => d);
-    xAxisGroup.call(xAxisCall);
+    // const xAxisCall = d3.axisBottom(xScale).tickFormat(d => d);
+    // xAxisGroup.call(xAxisCall);
     const yAxisCall = d3.axisLeft(yScale);
     yAxisGroup.call(yAxisCall);
 
@@ -161,6 +161,12 @@ export default class HistogramChart extends Component {
       });
     }
     drawLines();
+    const xAxisGroup = g
+      .append('g')
+      .attr('class', 'x axis')
+      .attr('transform', `translate(0, ${height})`);
+    const xAxisCall = d3.axisBottom(xScale).tickFormat(d => d);
+    xAxisGroup.call(xAxisCall);
 
     const legend = g
       .append('g')

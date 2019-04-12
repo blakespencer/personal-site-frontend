@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { SearchTrack, TrackProfile, TrackProbChart } from './';
 import ReactLoading from 'react-loading';
+import { withRouter } from 'react-router';
 
-export default class Search extends Component {
+class Search extends Component {
   constructor(props) {
     super(props);
 
@@ -21,9 +22,15 @@ export default class Search extends Component {
       const songQueryURI = encodeURIComponent(songQuery);
       const response = await fetch(`/api/search?query=${songQueryURI}`);
       const tracks = await response.json();
-      this.setState({ songQuery: '', tracks, selected: {}, probs: [] });
+      this.setState({
+        songQuery: '',
+        tracks,
+        selected: {},
+        probs: [],
+        isLoaded: true,
+      });
     } catch (err) {
-      this.setState({ message: 'error' });
+      this.setState({ message: 'error', isLoaded: false });
       console.log(err.message);
     }
   };
@@ -54,6 +61,9 @@ export default class Search extends Component {
   };
 
   render() {
+    if (this.state.isLoaded && this.state.tracks.length > 2) {
+      // this.props.history.push();
+    }
     return (
       <div className="center-all" id="search-form">
         <SearchTrack
@@ -61,17 +71,23 @@ export default class Search extends Component {
           handleChange={this.handleChange}
           handleSubmitSong={this.handleSubmitSong}
         />
-        <div id="profile-container">
-          {this.state.tracks.map(track => {
-            return (
-              <TrackProfile
-                key={track.uri}
-                {...track}
-                handleClick={this.handleClick}
-              />
-            );
-          })}
-        </div>
+        {this.state.tracks.length > 2 ? (
+          <section id="results">
+            <div id="profile-container">
+              {this.state.tracks.map(track => {
+                return (
+                  <TrackProfile
+                    key={track.uri}
+                    {...track}
+                    handleClick={this.handleClick}
+                  />
+                );
+              })}
+            </div>
+          </section>
+        ) : (
+          <div style={{ height: '50px', width: '100%' }} />
+        )}
         {this.state.probs.length ? (
           <div style={{ maxWidth: '1000px', width: '100%' }}>
             <TrackProbChart
@@ -88,3 +104,5 @@ export default class Search extends Component {
     );
   }
 }
+
+export default withRouter(Search);
